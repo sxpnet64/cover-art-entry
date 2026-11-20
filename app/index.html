@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Cover Studio — GTA-style cover art maker</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app">
+  <section class="controls" aria-label="Cover editor">
+    <h1>VICE COVER STUDIO</h1>
+    <p class="tagline">Your photos, Vice City style. Multi-panel poster cover, bold caption, sunset or neon grade — exported as a PNG to share.</p>
+
+    <fieldset>
+      <legend>1 · Photos</legend>
+      <p class="hint">Upload your own photos — read on your machine, never uploaded. Or load a sample.</p>
+      <div class="photo-row">
+        <label>Photo 1 <input id="photo0" type="file" accept="image/*"></label>
+        <button id="sample0" type="button" class="mini">Sample</button>
+      </div>
+      <div class="photo-row">
+        <label>Photo 2 <input id="photo1" type="file" accept="image/*"></label>
+        <button id="sample1" type="button" class="mini">Sample</button>
+      </div>
+      <div class="photo-row">
+        <label>Photo 3 <input id="photo2" type="file" accept="image/*"></label>
+        <button id="sample2" type="button" class="mini">Sample</button>
+      </div>
+      <label>Fill panels
+        <select id="fillMode">
+          <option value="one">One photo fills every panel</option>
+          <option value="each" selected>Each panel its own photo</option>
+        </select>
+      </label>
+    </fieldset>
+
+    <fieldset>
+      <legend>2 · Layout &amp; crop</legend>
+      <label>Layout
+        <select id="layout">
+          <option value="hero" selected>Hero + two panels</option>
+          <option value="grid">Wide hero + 3 below</option>
+          <option value="strips">Three vertical strips</option>
+        </select>
+      </label>
+      <label>Colour grade
+        <select id="theme">
+          <option value="sunset" selected>Vice Sunset</option>
+          <option value="neon">Neon Nights</option>
+          <option value="dusk">Palm Dusk</option>
+        </select>
+      </label>
+      <div class="panel-pick" role="group" aria-label="Pick a panel to crop">
+        <span id="panelLabel">Panel 1 of 3</span>
+        <button type="button" class="panel-btn active" data-panel="0">1</button>
+        <button type="button" class="panel-btn" data-panel="1">2</button>
+        <button type="button" class="panel-btn" data-panel="2">3</button>
+        <button type="button" class="panel-btn" data-panel="3">4</button>
+      </div>
+      <label>Photo in this panel
+        <select id="panelPhoto">
+          <option value="0">Photo 1</option>
+          <option value="1">Photo 2</option>
+          <option value="2">Photo 3</option>
+        </select>
+      </label>
+      <label>Zoom <span id="zoomVal">100%</span>
+        <input id="zoom" type="range" min="1" max="2.5" step="0.05" value="1">
+      </label>
+      <label>Pan left / right <input id="panX" type="range" min="-0.5" max="0.5" step="0.01" value="0"></label>
+      <label>Pan up / down <input id="panY" type="range" min="-0.5" max="0.5" step="0.01" value="0"></label>
+      <p class="hint">Tip: drag the photo right on the preview to pan it.</p>
+      <button id="resetCrop" type="button" class="mini">Reset crop</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>3 · Caption</legend>
+      <label>Title <input id="title" type="text" maxlength="24" value="VICE CITY"></label>
+      <label>Subtitle <input id="subtitle" type="text" maxlength="40" value="ONE LAST SCORE"></label>
+      <label>Title size <input id="titleSize" type="range" min="0.7" max="1.3" step="0.05" value="1"></label>
+    </fieldset>
+
+    <fieldset>
+      <legend>4 · Export</legend>
+      <label>Post size
+        <select id="exportSize">
+          <option value="square" selected>Square — 1080 x 1080</option>
+          <option value="portrait">Portrait — 1080 x 1350</option>
+          <option value="wide">Landscape — 1920 x 1080</option>
+        </select>
+      </label>
+      <button id="export" type="button" class="export">Export PNG</button>
+      <p id="status" role="status"></p>
+    </fieldset>
+    <p class="fineprint">Original artwork drawn in code. No Rockstar logo, artwork or font is used. Photos stay on your machine.</p>
+  </section>
+  <section class="preview" aria-label="Live cover preview">
+    <canvas id="cover" width="1080" height="1080" aria-label="The cover preview"></canvas>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
